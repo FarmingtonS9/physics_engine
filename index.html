@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>physics-engine test</title>
+  </head>
+  <body>
+    <script type="module">
+      import init, { start } from "./pkg/physics_engine.js";
+      init().then(() => {
+        start("WebAssembly");
+      });
+    </script>
+  </body>
+</html>

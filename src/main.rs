@@ -1,5 +1,6 @@
 //External libraries
 use libm::{self};
+use wasm_bindgen::prelude::*;
 
 
 //Directory setup
@@ -56,15 +57,24 @@ impl Canvas {
     fn get_sim_height(&self) -> f32 {
         self.sim_height
     }
+    fn cX(&self, pos: Position) -> f32 {
+        pos.0 * self.canvas_scale
+    }
+    fn cY(&self, pos: Position) -> f32 {
+        self.canvas_height - pos.1 * self.canvas_scale
+    }
 }
+
+//Position struct. X, Y coordinates.
+struct Position(f32, f32);
 
 struct Ball {
     radius: f32,
-    pos: (f32, f32), //(x, y) coordinates
+    pos: Position, //(x, y) coordinates
 }
 
 impl Ball {
-    fn new(radius: f32, pos: (f32, f32)) -> Ball {
+    fn new(radius: f32, pos: Position) -> Ball {
         Ball {
             radius,
             pos,
@@ -72,7 +82,7 @@ impl Ball {
     }
 
     fn default() -> Ball {
-        let ball = Ball::new(300., (0., 0.));
+        let ball = Ball::new(300., Position(0., 0.));
         ball
     }
 }
